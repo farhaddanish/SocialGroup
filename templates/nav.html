@@ -1,0 +1,19 @@
+<nav class="navbar navbar-light bg-light">
+        <a href="{% url 'index' %}" class="navbar-brand">
+              Group System
+          </a>
+
+        {% if user.is_authenticated %}
+          <ul class="navbar-nav justify-content-end">
+              <li class="nav-item"><a href="{% url 'groups' %}" class="nav-link">Groups</a></li>
+              <li class="nav-item"><a href="{% url 'postFromYou' %}" class="nav-link">Posts that You did it</a></li>
+              <li class="nav-item"><a href="{% url 'profiles' %}" class="nav-link">profiles</a></li>
+          </ul>
+        {% else %}
+             <ul class="navbar-nav justify-content-end">
+              <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+             </ul>
+        {% endif %}
+
+          
+</nav>

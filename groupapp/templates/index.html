@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <script src="{% static 'join1.js' %} " defer></script>
+
+{% endblock  %}
+
+{% block content %}
+{% include 'nav.html' %}
+
+<h1 class="text-center"> all Post and Group </h1>
+
+<h1 class="text-danger text-center">  Groups that you are in </h1>
+{% if group %}
+{% for group in group %}
+<div class ="container">
+    <div class="mt-2">
+        <h2 class="text-center">{{group.name}} </h2>
+        <p class="text-center" >{{group.describe}} </p>
+    </div>
+        <hr/>
+    <div class="text-center">
+        <form class="join_form" data-join-id ="{{group.id}}">
+        {% csrf_token %}
+        <button id="join_btn" class="btn btn-primary " >DisJoint </button>
+        </form>
+
+        <a href="{% url 'createPost_ajax' id=group.id %}" id="btnCreatePost"  class="btn btn-primary">Create a Post </a>
+        <a href="{% url 'seePosts'  id=group.id %}" id="btnSeePost"  class="btn btn-primary">See all Post </a>
+
+        
+    </div>
+{% endfor %}
+{% else %}
+<div class="container">
+    <h3 class="text-center"> It seems that you are not joint to some Group create now </h3>
+        <a href="{% url 'creategroup' %}" class="btn btn-primary text-center"> Create  </a>
+</div>
+
+
+{% endif %}
+{% endblock  %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    {% comment %} <script src="{% static 'main.js' %}" defer></script> {% endcomment %}
+{% endblock  %}
+{% block content %}
+    <h1 class="text-center"> Edit Photo  </h1>
+    <form id="image_form" method="POST" action="{% url 'EditProfile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="imagename" id ="imageFile">
+        <input type="submit" value="Submit">
+    </form>
+        
+{% endblock  %}

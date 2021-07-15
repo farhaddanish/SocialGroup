@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load  bootstrap3 %}
+{% load static %}
+
+
+{% block content %}
+{% include 'nav.html' %}
+
+<h1 class="text-center "> Create Group</h1>
+
+
+<form method="POST" action="{% url 'creategroup' %}">
+{% csrf_token %}
+{% bootstrap_form form%}
+<input type="submit" value="Create" />
+</fom>
+
+ {% endblock %} 

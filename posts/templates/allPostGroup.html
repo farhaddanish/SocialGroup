@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load  bootstrap3 %}
+{% load static %}
+{% block content %}
+{% include 'nav.html' %}
+<h1 class="text-center text-danger mt-4">All Post in this Group</h1>
+{% if posts %}
+    {% for post in posts %}
+        <div class="container border rounded mt-5">
+                <img src="{{post.profile.image.url}}" 
+                    width="100" height="100"
+                            class="rounded-circle mb-2 img-fluid" />
+            <div  class="text-center">
+                <h1 clas="text-left"> Posted : {{post.Byuser}} </h1>
+                <p class="text-center"> {{post.text}} </p>
+                <small class="text-center"> {{post.date}} </small>
+            </div>
+        </div>
+    {% endfor %}
+
+{% else %}
+    <p class="text-center"> No Post </p>
+{% endif %}
+
+ {% endblock %} 

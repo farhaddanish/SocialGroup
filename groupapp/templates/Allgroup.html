@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <script src="{% static 'join1.js' %} " defer></script>
+{% endblock  %}
+{% block content %}
+    {% include 'nav.html' %}
+<h1 class="text-center text-danger">  All group </h1>
+<hr/>
+{% if Allgroup %}
+{% for group in Allgroup %}
+{% if request.user  in group.member.all %}
+<div class="container">
+    <div class="">
+        <h2 class="text-center text-danger">{{group.name}}</h2>
+        <p class="text-center text-dark">{{group.describe}}</p>
+    </div>
+    <div class="text-center">
+        <h3 id="countMember{{group.id}}" class="text-warning">Memberr : {{group.member.count}}</h3>
+    <form class="join_form" data-join-id ="{{group.id}}">
+        {% csrf_token %}
+        <button id="join_btn" class="btn btn-primary " >DisJoint </button>
+    </form>
+    <a href="{% url 'creategroup' %}" class="btn btn-primary " >see Posts </a>
+    {% if request.user == group.admin %}
+        <form class="delete_form" data-Delete-id ="{{group.id}}">
+        {% csrf_token %}
+        <button id="Delete_btn" class="btn btn-primary " >Delete </button>
+    </form> 
+    {% endif %}
+    </div>
+    <hr/>
+</div>
+{% else %}
+
+<div class="container">
+    <div class="">
+        <h2 class="text-center text-danger">{{group.name}}</h2>
+        <p class="text-center text-dark">{{group.describe}}</p>
+    </div>
+    <div class="text-center">
+        <h3 id="countMember{{group.id}}" class="text-warning">Memberr  :  {{group.member.count}}</h3>
+    <form class="join_form" data-join-id ="{{group.id}}">
+        {% csrf_token %}
+        <button id="join_btn" class="btn btn-primary " >Joint </button>
+    </form>
+    <a href="{% url 'creategroup' %}" class="btn btn-primary " >see Posts </a>
+    {% if request.user == group.admin %}
+    <form class="delete_form" data-Delete-id ="{{group.id}}">
+        {% csrf_token %}
+        <button id="Delete_btn" class="btn btn-primary " >Delete </button>
+    </form>
+    {% endif %}
+    </div>
+    <hr/>
+</div>
+{% endif %}
+{% endfor %}
+<a href="{% url 'creategroup' %}" class="btn btn-primary " >Create New </a>
+{% else %}
+<h1 class="text-center text-danger"> nothing create now </h1>
+    <a href="{% url 'creategroup' %}" class="btn btn-primary " >Create </a>
+{% endif %}
+    
+{% endblock  %}

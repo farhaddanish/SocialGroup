@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+{% load static %}
+{% block css %}
+    {% comment %} <script src="{% static 'changePassword.js' %}" defer></script> {% endcomment %}
+{% endblock  %}
+{% block content %}
+<div id="profile"></div>
+<h1 class="text-center"> User Change Form </h1>
+
+         <form id="form_change" method ="POST" action="{% url 'changename' %}">
+          {% csrf_token %}
+            <input type="text" name="name" class="fadeIn fourth text-dark bg-warning" value="">
+          
+        <br>
+            <input type="submit" class=" btn fadeIn fourth text-dark bg-warning" value="change">
+          </form>
+
+{% endblock  %}
